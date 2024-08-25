@@ -12,6 +12,7 @@ services:
       - FIRMWAREVERSION=1100
     cap_add:
     - NET_ADMIN
+    - NET_RAW
     privileged: true
     volumes:
       - ./pppwn:/docker_pppwn/pppwn
