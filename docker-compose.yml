@@ -8,8 +8,8 @@ services:
     container_name: pppwn
     network_mode: "host"
     environment:
-      - INTERFACE=eth1
-      - FIRMWAREVERSION=900
+      - INTERFACE=enx74dadaf4bd40
+      - FIRMWAREVERSION=1100
     cap_add:
     - NET_ADMIN
     privileged: true
