@@ -7,12 +7,8 @@ RUN apk update && apk add --no-cache \
     libpcap \
     supervisor
 RUN pip install scapy --break-system-packages
-RUN mkdir -p /docker_pppwn/pppwn/
 RUN git clone https://github.com/Mudcrab353/docker_pppwn.git
 EXPOSE 8066
-RUN mkdir -p /etc/nginx/http.d/
-RUN chmod 777 -R /etc/nginx/
-RUN chmod 777 -R /docker_pppwn/
 RUN ln -sf /docker_pppwn/pppwn/web/nginx/default.conf /etc/nginx/http.d/default.conf
 RUN ln -sf /docker_pppwn/pppwn/web/supervisor/supervisord.conf /etc/supervisord.conf
 RUN ln -sf /docker_pppwn/pppwn/web/app/public /var/www/html
@@ -22,6 +18,7 @@ RUN sed -i 's/listen = 9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/p
 RUN sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/php-fpm.d/www.conf
 WORKDIR "/docker_pppwn"
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
 
 
 
