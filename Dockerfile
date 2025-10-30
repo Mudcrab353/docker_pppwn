@@ -18,6 +18,8 @@ RUN sed -i 's/listen = 9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/p
 RUN sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/php-fpm.d/www.conf
 WORKDIR "/docker_pppwn"
 #CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["tail", "-f", "/dev/null"]
+
 
 
 
