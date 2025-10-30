@@ -7,6 +7,7 @@ RUN apk update && apk add --no-cache \
     libpcap \
     supervisor
 RUN pip install scapy --break-system-packages
+WORKDIR "/"
 RUN git clone https://github.com/Mudcrab353/docker_pppwn.git
 EXPOSE 8066
 RUN ln -sf /docker_pppwn/pppwn/web/nginx/default.conf /etc/nginx/http.d/default.conf
@@ -19,6 +20,7 @@ RUN sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/' /usr/l
 WORKDIR "/docker_pppwn"
 #CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 CMD ["tail", "-f", "/dev/null"]
+
 
 
 
