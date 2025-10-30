@@ -13,15 +13,16 @@ EXPOSE 8066
 RUN mkdir -p /etc/nginx/http.d/
 RUN chmod 777 -R /etc/nginx/
 RUN chmod 777 -R /docker_pppwn/
-#RUN ln -s /docker_pppwn/pppwn/web/nginx/default.conf /etc/nginx/http.d/default.conf
-RUN ln -s /docker_pppwn/pppwn/web/supervisor/supervisord.conf /etc/supervisord.conf
-RUN ln -s /docker_pppwn/pppwn/web/app/public /var/www/html
+RUN ln -sf /docker_pppwn/pppwn/web/nginx/default.conf /etc/nginx/http.d/default.conf
+RUN ln -sf /docker_pppwn/pppwn/web/supervisor/supervisord.conf /etc/supervisord.conf
+RUN ln -sf /docker_pppwn/pppwn/web/app/public /var/www/html
 RUN sed -i 's/;listen.owner = www-data/listen.owner = nginx/' /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i 's/;listen.group = www-data/listen.group = nginx/' /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i 's/listen = 9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/php-fpm.d/zz-docker.conf
 RUN sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/' /usr/local/etc/php-fpm.d/www.conf
 WORKDIR "/docker_pppwn"
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
 
 
 
